@@ -1,0 +1,30 @@
+import winreg as reg
+
+def Firewall_settings():
+    def check_firewall_setting():
+        try:
+            key = reg.OpenKey(reg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile")
+            value, reg_type = reg.QueryValueEx(key, "EnableFirewall")
+            reg.CloseKey(key)
+
+            if value == 1:
+                print("The firewall is enabled.")
+            else:
+                print("The firewall is disabled. Applying the recommended setting...")
+                set_firewall_setting()
+        except FileNotFoundError:
+            print("The firewall setting was not found. Applying the recommended setting...")
+            set_firewall_setting()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    def set_firewall_setting():
+        try:
+            key = reg.OpenKey(reg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", 0, reg.KEY_SET_VALUE)
+            reg.SetValueEx(key, "EnableFirewall", 0, reg.REG_DWORD, 1)
+            reg.CloseKey(key)
+            print("The firewall setting has been updated to the recommended value.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    check_firewall_setting()
