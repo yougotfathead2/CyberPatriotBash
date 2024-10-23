@@ -6,7 +6,7 @@ function Check-LogSuccessfulConnectionsSetting {
     if (Test-Path $registryPath) {
         $logSuccessfulConnections = Get-ItemProperty -Path $registryPath -Name $logSuccessfulConnectionsName -ErrorAction SilentlyContinue
 
-        if ($logSuccessfulConnections) {
+        if ($null -ne $logSuccessfulConnections) {
             if ($logSuccessfulConnections.$logSuccessfulConnectionsName -eq 1) {
                 Write-Host "Logging of successful connections is enabled."
             } else {
@@ -33,7 +33,7 @@ function Set-LogSuccessfulConnectionsSetting {
         New-ItemProperty -Path $registryPath -Name $logSuccessfulConnectionsName -PropertyType DWORD -Value $enableLogging -Force
         Write-Host "Logging of successful connections has been enabled."
     } catch {
-        Write-Host "An error occurred: $_"
+        Write-Host "An error occurred: $($_.Exception.Message)"
     }
 }
 
