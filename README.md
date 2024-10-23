@@ -1,7 +1,7 @@
 # CyberPatriotBash
 # How to run the PowerShell script:
 # Open PowerShell with administrative privileges.
-# Copy and paste the script into the PowerShell window or save it as a .ps1 file and run it.
+# Bring the file over to the VM and run the file with the extension .ps1
 # -----------------------------------------
 # Firewall (under construction)
 # Password policy (done unless something needs adding)
