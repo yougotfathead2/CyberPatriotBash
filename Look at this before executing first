@@ -3,6 +3,7 @@ Type Set-ExecutionPolicy Unrestricted.
 Press Enter.
 Type A.
 Run the PowerShell script.
+have to locate the file(go to the directory where the script file is aka desktop) after dragging it over then use the command .\nameoffile
 Once finished, type Set-ExecutionPolicy Restricted.
 Press Enter.
 Type Exit.
